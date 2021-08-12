@@ -1,4 +1,4 @@
-class Node {
+class NodeDoubly {
   constructor(val, prev, next) {
     this.value = val;
     this.prev = prev || null;
@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-class LinkedList {
+class DoublyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -58,19 +58,56 @@ class LinkedList {
   }
 }
 
-const node1 = new Node(1);
-const node2 = new Node(2);
-const node3 = new Node(3);
-const node4 = new Node(2);
+class NodeSingly {
+  constructor(val, next) {
+    this.value = val;
+    this.next = next || null;
+  }
+}
 
-const newList = new LinkedList();
-newList.addToTail(node1);
-newList.addToTail(node2);
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.depth = 0;
+  }
+
+  addToTail(node) {
+    if (this.tail) {
+      this.tail.next = node;
+      this.tail = node;
+    } else {
+      this.tail = this.head = node;
+    }
+
+    ++this.depth;
+  }
+
+  addToHead(node) {
+    if (this.head) {
+      const oldHead = this.head;
+      this.head = node;
+      this.head.next = oldHead;
+    } else {
+      this.head = this.tail = node;
+    }
+    ++this.depth;
+  }
+}
+const node1 = new NodeSingly(1);
+const node2 = new NodeSingly(2);
+const node3 = new NodeSingly(3);
+const node4 = new NodeSingly(2);
+
+const newList = new SinglyLinkedList();
+newList.addToHead(node1);
+newList.addToHead(node2);
 newList.addToTail(node3);
 newList.addToTail(node4);
-newList.removeNode(2);
 
 module.exports = {
-  Node,
-  LinkedList,
+  NodeDoubly,
+  DoublyLinkedList,
+  NodeSingly,
+  SinglyLinkedList,
 };

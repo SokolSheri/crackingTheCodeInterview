@@ -1,11 +1,13 @@
-const { Node, LinkedList } = require("./linkedlist");
+// Write code to remove duplicates from an unsorted linked list
 
-const node1 = new Node(1);
-const node2 = new Node(2);
-const node3 = new Node(3);
-const node4 = new Node(2);
+const { NodeDoubly, DoublyLinkedList } = require("./linkedlist");
 
-const newList = new LinkedList();
+const node1 = new NodeDoubly(1);
+const node2 = new NodeDoubly(2);
+const node3 = new NodeDoubly(3);
+const node4 = new NodeDoubly(2);
+
+const newList = new DoublyLinkedList();
 newList.addToTail(node1);
 newList.addToTail(node2);
 newList.addToTail(node3);

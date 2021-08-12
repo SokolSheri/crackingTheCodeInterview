@@ -34,30 +34,43 @@ class LinkedList {
     }
   }
 
-  removeNode(value) {
-    let notFound = true;
-    let returnThisNode;
-    if (this.head.value === value) {
-      returnThisNode = this.head;
-      this.head = this.head.next;
-      this.head.prev = null;
-      return returnThisNode;
+  removeNode(value, node = this.head) {
+    if (!node) {
+      return;
     }
-    let currentNode = this.head;
-    while (currentNode.next) {
-      currentNode = currentNode.next;
-      if (this.tail.value === value) {
-        returnThisNode = this.tail;
-        this.tail = this.tail.prev;
-        this.tail.next = null;
-        return returnThisNode;
-      }
-      if (currentNode.value === value) {
-        notFound = false;
-        returnThisNode = currentNode;
-        currentNode.prev = currentNode.next;
-        return returnThisNode;
+
+    if (node.value === value) {
+      let previousNode = node.prev;
+      let nextNode = node.next;
+      if (!node.next) {
+        previousNode.next = null;
+        this.tail = previousNode;
+      } else if (!node.prev) {
+        nextNode.prev = null;
+        this.head = nextNode;
+      } else {
+        previousNode.next = nextNode;
+        nextNode.prev = previousNode;
       }
     }
+
+    return this.removeNode(value, node.next);
   }
 }
+
+const node1 = new Node(1);
+const node2 = new Node(2);
+const node3 = new Node(3);
+const node4 = new Node(2);
+
+const newList = new LinkedList();
+newList.addToTail(node1);
+newList.addToTail(node2);
+newList.addToTail(node3);
+newList.addToTail(node4);
+newList.removeNode(2);
+
+module.exports = {
+  Node,
+  LinkedList,
+};

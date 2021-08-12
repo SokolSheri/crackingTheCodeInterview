@@ -10,6 +10,7 @@ class DoublyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.depth = 0;
   }
 
   addToTail(node) {
@@ -21,6 +22,7 @@ class DoublyLinkedList {
     } else {
       this.tail = this.head = node;
     }
+    ++this.depth;
   }
 
   addToHead(node) {
@@ -32,6 +34,30 @@ class DoublyLinkedList {
     } else {
       this.head = this.tail = node;
     }
+    ++this.depth;
+  }
+
+  removeAllNodesWithThisVal(value, node = this.head) {
+    if (!node) {
+      return;
+    }
+
+    if (node.value === value) {
+      let previousNode = node.prev;
+      let nextNode = node.next;
+      if (!node.next) {
+        previousNode.next = null;
+        this.tail = previousNode;
+      } else if (!node.prev) {
+        nextNode.prev = null;
+        this.head = nextNode;
+      } else {
+        previousNode.next = nextNode;
+        nextNode.prev = previousNode;
+      }
+    }
+
+    return this.removeAllNodesWithThisVal(value, node.next);
   }
 
   removeNode(value, node = this.head) {
@@ -52,6 +78,8 @@ class DoublyLinkedList {
         previousNode.next = nextNode;
         nextNode.prev = previousNode;
       }
+
+      return true;
     }
 
     return this.removeNode(value, node.next);

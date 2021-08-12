@@ -21,7 +21,7 @@ const removeDups = (ll) => {
     }
 
     if (memo[node.value]) {
-      ll.removeNode(node.value);
+      ll.removeAllNodesWithThisVal(node.value);
     } else {
       memo[node.value] = 1;
     }

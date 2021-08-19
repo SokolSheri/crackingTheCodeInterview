@@ -20,10 +20,11 @@ newList.addToTail(node7);
 const partition = (x, ll) => {
   let node = ll.head;
   let returnList = new DoublyLinkedList();
-  for (let i = 0; i < ll.depth; i++) {
-    if (!node) {
-      break;
-    }
+  // for (let i = 0; i < ll.depth; i++) {
+  //   if (!node) {
+  //     break;
+  //   }
+  while (node) {
     let newNode = new NodeDoubly(node.value);
     if (node.value >= x) {
       returnList.addToTail(newNode);
@@ -32,6 +33,7 @@ const partition = (x, ll) => {
     }
     node = node.next;
   }
+  //}
 
   return returnList;
 };
